@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from interface import *
+from .interface import *
 import RPi.GPIO as GPIO
 
 

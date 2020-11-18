@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from hardware import *
+from .hardware import *
+import time
 
-driveA = Drive(5, 6, 0)
+driveA = Drive(6, 0, 0)
 time.sleep(1.0)
-driveB = Drive(26, 13, 1)
+driveB = Drive(5, 0, 1)
 time.sleep(1.0)
 
 driveA.forward()

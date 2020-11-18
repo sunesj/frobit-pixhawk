@@ -41,8 +41,9 @@ def setDirection(gpio, direction):
 
 
 def getDirection(gpio):
-    return get('gpio/gpio' + str(gpio) + '/direction')
+    direction = get('gpio/gpio' + str(gpio) + '/direction')
     time.sleep(sleep_period)
+    return direction
 
 
 def setValue(gpio, value):
