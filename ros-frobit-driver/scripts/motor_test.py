@@ -3,9 +3,9 @@
 
 from hardware import *
 
-driveA = Drive(5,6,0)
+driveA = Drive(5, 6, 0)
 time.sleep(1.0)
-driveB = Drive(26,13,1)
+driveB = Drive(26, 13, 1)
 time.sleep(1.0)
 
 driveA.forward()

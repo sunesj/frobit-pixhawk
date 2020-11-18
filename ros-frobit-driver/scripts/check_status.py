@@ -3,16 +3,17 @@
 from serial import Serial
 import os
 
+
 def parse_line_to_dict(line):
     header = [
-            'Vbatt', 
-            'Ibatt', 
-            'motor_error', 
-            'low_batt', 
-            'shutdown', 
-            'm1_diagnosis', 
-            'm2_diagnosis'
-            ]
+        'Vbatt',
+        'Ibatt',
+        'motor_error',
+        'low_batt',
+        'shutdown',
+        'm1_diagnosis',
+        'm2_diagnosis'
+    ]
     raw = line.split(';')[0:7]
     raw = [element.strip() for element in raw]
     raw = [int(i) for i in raw]
@@ -24,7 +25,6 @@ def parse_line_to_dict(line):
     return dict(zip(header, raw))
 
 
-
 ser = Serial('/dev/ttyAMA0', 115200, timeout=1)
 while True:
     try:
@@ -32,7 +32,7 @@ while True:
         data = parse_line_to_dict(line)
         if data['shutdown'] == 1:
             os.system("sudo poweroff")
-        #print(data)
+        print(data)
     except KeyboardInterrupt:
         print('interrupted!')
         exit(0)

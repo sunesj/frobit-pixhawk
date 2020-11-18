@@ -3,6 +3,7 @@
 from interface import *
 import RPi.GPIO as GPIO
 
+
 class Encoder():
     def __init__(self, pinA, pinB):
         self.value = 0.0
@@ -55,10 +56,11 @@ class Encoder():
     def getValue(self):
         return self.value
 
+
 class Button():
     def __init__(self, pin):
         self.pin = pin
-        
+
         exportGPIO(self.pin)
         setDirection(self.pin, 'in')
         setPullUp(self.pin)
@@ -71,7 +73,7 @@ class Button():
 
 
 class Drive():
-    def __init__(self, direction_pin, pwm, forward_direction ):
+    def __init__(self, direction_pin, pwm, forward_direction):
         self.direction = direction_pin
         self.forward_direction = forward_direction
 
@@ -83,10 +85,10 @@ class Drive():
         self.pwm = pwm
         self.direction_forward = None
         exportGPIO(self.direction)
-        setDirection(self.direction,'out')
+        setDirection(self.direction, 'out')
         exportPWM(self.pwm)
         setPWMperiod(pwm)
-        setPWMDuty(self.pwm,0)
+        setPWMDuty(self.pwm, 0)
 
     def __del__(self):
         unexportPWM(self.pwm)
@@ -100,13 +102,13 @@ class Drive():
 
     def forward(self):
         disablePWM(self.pwm)
-        setValue(self.direction,self.forward_direction)
+        setValue(self.direction, self.forward_direction)
         enablePWM(self.pwm)
         self.direction_forward = True
 
     def reverse(self):
         disablePWM(self.pwm)
-        setValue(self.direction,self.reverse_direction)
+        setValue(self.direction, self.reverse_direction)
         enablePWM(self.pwm)
         self.direction_forward = False
 
@@ -115,5 +117,4 @@ class Drive():
             self.forward()
         if percent < 0 and self.direction_forward:
             self.reverse()
-        setPWMDuty(self.pwm,abs(percent))
-
+        setPWMDuty(self.pwm, abs(percent))
