@@ -1,10 +1,10 @@
 version: '3'
 services:
-  ros-core:
-    image: ros:melodic
-    command: roscore
-    restart: always
-    network_mode: host
+#  ros-core:
+#    image: ros:melodic
+#    command: roscore
+#    restart: always
+#    network_mode: host
 
   ros-pid:
     build: ../ros-pid/
@@ -12,7 +12,7 @@ services:
     restart: always
     network_mode: host
     volumes:
-    - /home/pi/src/ros-pid/scripts/:/scripts/
+    - /home/pi/ros-pid/scripts/:/scripts/
   
   ros-frobit-driver:
     build: ../ros-frobit-driver/
@@ -21,8 +21,17 @@ services:
     network_mode: host
     privileged: true
     volumes:
-    - /home/pi/src/ros-frobit-driver/scripts/:/scripts/
+    - /home/pi/ros-frobit-driver/scripts/:/scripts/
     - /sys/class/:/sys/class/
+
+  mavros:
+    build: ../ros-mavros/
+    command: roslaunch mavros px4.launch
+    restart: always
+    network_mode: host
+    privileged: true
+    volumes:
+    - /dev/:/dev/
 
   ros-px4-adapter:
     image: ros:melodic
@@ -30,11 +39,4 @@ services:
     restart: always
     network_mode: host
     volumes:
-    - /home/pi/src/ros-px4-adapter/bin/:/root/bin/
-
-  mavros:
-    build: ../ros-mavros/
-    command: roslaunch mavros px4.launch fcu_url:=/dev/ttyACM0:57600
-    restart: always
-    network_mode: host
-    privileged: true
+    - /home/pi/ros-px4-adapter/bin/:/root/bin/
