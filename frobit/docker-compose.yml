@@ -31,3 +31,10 @@ services:
     network_mode: host
     volumes:
     - /home/pi/src/ros-px4-adapter/bin/:/root/bin/
+
+  mavros:
+    build: ../ros-mavros/
+    command: roslaunch mavros px4.launch fcu_url:=/dev/ttyACM0:57600
+    restart: always
+    network_mode: host
+    privileged: true
