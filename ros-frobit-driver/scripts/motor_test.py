@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from .hardware import *
+from hardware import *
 import time
 
 driveA = Drive(6, 0, 0)
