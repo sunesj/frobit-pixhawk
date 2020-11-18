@@ -8,16 +8,18 @@ services:
 
   ros-pid:
     build: ../ros-pid/
+    command: roslaunch --wait /scripts/frobit.launch
     restart: always
     network_mode: host
-    command: roslaunch --wait /scripts/frobit.launch
+    volumes:
+     - /home/pi/src/ros-pid/scripts/:/scripts/
   
   ros-frobit-driver:
     build: ../ros-frobit-driver/
+    command: stdbuf -o L python /scripts/frobit_node.py
     restart: always
     network_mode: host
     privileged: true
-    command: stdbuf -o L python /scripts/frobit_node.py
     volumes:
      - /home/pi/src/ros-frobit-driver/scripts/:/scripts/
      - /sys/class/:/sys/class/
