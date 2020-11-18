@@ -38,7 +38,6 @@ while True:
             os.system('wall "Frobit will power off in 10 seconds"')
             time.sleep(10)
             os.system("sudo poweroff")
-        #print(data)
     except KeyboardInterrupt:
         print('interrupted!')
         exit(0)
