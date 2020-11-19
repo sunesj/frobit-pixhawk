@@ -1,15 +1,17 @@
 version: '3'
 services:
-  #  ros-core:
-  #    image: ros:melodic
-  #    command: roscore
-  #    restart: always
-  #    network_mode: host
+  ros-core:
+    image: ros:melodic
+    command: roscore
+    restart: always
+    network_mode: host
 
   mavros:
     build: ../ros-mavros/
     image: frobit-mavros:latest
     command: roslaunch mavros px4.launch
+    depends_on:
+      - ros-core
     restart: always
     network_mode: host
     privileged: true
@@ -19,6 +21,9 @@ services:
   ros-px4-adapter:
     image: frobit-mavros:latest
     command: python /scripts/px4_adapter_node.py
+    depends_on:
+      - ros-core
+      - mavros
     restart: always
     network_mode: host
     volumes:
@@ -27,6 +32,8 @@ services:
   ros-pid:
     build: ../ros-pid/
     command: roslaunch --wait /scripts/frobit.launch
+    depends_on:
+      - ros-core
     restart: always
     network_mode: host
     volumes:
@@ -35,6 +42,8 @@ services:
   ros-frobit-driver:
     build: ../ros-frobit-driver/
     command: stdbuf -o L python /scripts/frobit_node.py
+    depends_on:
+      - ros-core
     restart: always
     network_mode: host
     privileged: true

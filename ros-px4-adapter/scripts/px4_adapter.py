@@ -14,9 +14,9 @@ class PX4Adapter():
     def __init__(self):
         rospy.init_node('px4_adapter_node', anonymous=True)
 
-        pub_left = rospy.Publisher("/frobit/left_setpoint", Float64, queue_size=1)
-        pub_right = rospy.Publisher("/frobit/right_setpoint", Float64, queue_size=1)
-        sub = rospy.Subscriber("/mavros/rc/out", RCOut, self.subscriber_callback)
+        self.pub_left = rospy.Publisher("/frobit/left_setpoint", Float64, queue_size=1)
+        self.pub_right = rospy.Publisher("/frobit/right_setpoint", Float64, queue_size=1)
+        self.sub = rospy.Subscriber("/mavros/rc/out", RCOut, self.subscriber_callback)
 
 
     def subscriber_callback(self, msg):
