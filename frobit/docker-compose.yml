@@ -6,6 +6,23 @@ services:
 #    restart: always
 #    network_mode: host
 
+  mavros:
+    build: ../ros-mavros/
+    command: roslaunch mavros px4.launch
+    restart: always
+    network_mode: host
+    privileged: true
+    volumes:
+    - /dev/:/dev/
+
+  ros-px4-adapter:
+    image: ros:melodic
+    command: /root/bin/px4_adapter_node
+    restart: always
+    network_mode: host
+    volumes:
+    - /home/pi/ros-px4-adapter/scripts/:/scripts/
+
   ros-pid:
     build: ../ros-pid/
     command: roslaunch --wait /scripts/frobit.launch
@@ -23,20 +40,3 @@ services:
     volumes:
     - /home/pi/ros-frobit-driver/scripts/:/scripts/
     - /sys/class/:/sys/class/
-
-  mavros:
-    build: ../ros-mavros/
-    command: roslaunch mavros px4.launch
-    restart: always
-    network_mode: host
-    privileged: true
-    volumes:
-    - /dev/:/dev/
-
-  ros-px4-adapter:
-    image: ros:melodic
-    command: /root/bin/px4_adapter_node
-    restart: always
-    network_mode: host
-    volumes:
-    - /home/pi/ros-px4-adapter/bin/:/root/bin/
