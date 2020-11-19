@@ -26,6 +26,7 @@ class PX4Adapter():
         left_msg.data = output_min + (output_dif * (msg.channels[0] - input_min) / input_dif)
         right_msg.data = output_min + (output_dif * (msg.channels[1] - input_min) / input_dif)
 
+        rospy.loginfo("Publishing")
         self.pub_left.publish(left_msg)
         self.pub_right.publish(right_msg)
 
@@ -34,4 +35,5 @@ class PX4Adapter():
         r = rospy.Rate(1)
         while not rospy.is_shutdown():
             print("px4_adapter_node alive and well")
+            rospy.loginfo("Alive")
             r.sleep()
