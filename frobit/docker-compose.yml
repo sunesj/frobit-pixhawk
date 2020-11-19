@@ -17,7 +17,7 @@ services:
 
   ros-px4-adapter:
     image: ros:melodic
-    command: /root/bin/px4_adapter_node
+    command: python /scripts/px4_adapter_node.py
     restart: always
     network_mode: host
     volumes:
