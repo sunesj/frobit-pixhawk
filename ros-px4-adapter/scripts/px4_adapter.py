@@ -10,6 +10,7 @@ output_max = 1.78
 output_min = -1.78
 output_dif = output_max - output_min
 
+
 class PX4Adapter():
     def __init__(self):
         rospy.init_node('px4_adapter_node', anonymous=True)
@@ -18,6 +19,7 @@ class PX4Adapter():
         self.pub_right = rospy.Publisher("/frobit/right_setpoint", Float64, queue_size=1)
         self.sub = rospy.Subscriber("/mavros/rc/out", RCOut, self.subscriber_callback)
 
+        self.has_published = False
 
     def subscriber_callback(self, msg):
         left_msg = Float64()
@@ -26,13 +28,18 @@ class PX4Adapter():
         left_msg.data = output_min + (output_dif * (msg.channels[0] - input_min) / input_dif)
         right_msg.data = output_min + (output_dif * (msg.channels[1] - input_min) / input_dif)
 
-        rospy.loginfo("Publishing")
         self.pub_left.publish(left_msg)
         self.pub_right.publish(right_msg)
 
+        self.has_published = True
 
     def spin(self):
         r = rospy.Rate(1)
         while not rospy.is_shutdown():
-            rospy.loginfo("Alive")
+            if self.has_published:
+                rospy.loginfo("Alive - Has published")
+                self.has_published = False
+            else:
+                rospy.loginfo("Alive - Nothing published")
             r.sleep()
+
