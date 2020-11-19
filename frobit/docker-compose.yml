@@ -21,7 +21,7 @@ services:
     restart: always
     network_mode: host
     volumes:
-    - /home/pi/ros-px4-adapter/scripts/:/scripts/
+    - /home/pi/src/ros-px4-adapter/scripts/:/scripts/
 
   ros-pid:
     build: ../ros-pid/
@@ -29,7 +29,7 @@ services:
     restart: always
     network_mode: host
     volumes:
-    - /home/pi/ros-pid/scripts/:/scripts/
+    - /home/pi/src/ros-pid/scripts/:/scripts/
   
   ros-frobit-driver:
     build: ../ros-frobit-driver/
@@ -38,5 +38,5 @@ services:
     network_mode: host
     privileged: true
     volumes:
-    - /home/pi/ros-frobit-driver/scripts/:/scripts/
+    - /home/pi/src/ros-frobit-driver/scripts/:/scripts/
     - /sys/class/:/sys/class/
