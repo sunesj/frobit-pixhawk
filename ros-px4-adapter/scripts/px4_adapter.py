@@ -34,6 +34,5 @@ class PX4Adapter():
     def spin(self):
         r = rospy.Rate(1)
         while not rospy.is_shutdown():
-            print("px4_adapter_node alive and well")
             rospy.loginfo("Alive")
             r.sleep()
