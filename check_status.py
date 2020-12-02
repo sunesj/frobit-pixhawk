@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # 
 # Put in sudo's crontab:
-# @reboot /usr/bin/python /home/pi/frobit/scripts/check_status.py
+# @reboot /usr/bin/python /home/pi/Frobit-Pixhawk/check_status.py
 
 from serial import Serial
 import os,time

@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Put in crontab:
-# @reboot /home/pi/frobit/scripts/shutdown.sh
+# @reboot /home/pi/Frobit-Pixhawk/signal_alive.sh
 
 echo 27 > /sys/class/gpio/export
 sleep 1.0

@@ -7,7 +7,7 @@ services:
     network_mode: host
 
   ros-mavros:
-    build: ../ros-mavros/
+    build: ros-mavros
     image: frobit-mavros:latest
     command: roslaunch --wait mavros px4.launch
     depends_on:
@@ -26,22 +26,20 @@ services:
     restart: always
     network_mode: host
     volumes:
-      - /home/pi/src/ros-px4-adapter/scripts/:/scripts/
-      #- /home/sunesj/PIR/Frobit/ros-px4-adapter/scripts/:/scripts/
+      - ./ros-px4-adapter/scripts/:/scripts/
 
   ros-pid:
-    build: ../ros-pid/
+    build: ros-pid
     command: roslaunch --wait /scripts/frobit.launch
     depends_on:
       - ros-core
     restart: always
     network_mode: host
     volumes:
-      - /home/pi/src/ros-pid/scripts/:/scripts/
-      #- /home/sunesj/PIR/Frobit/ros-pid/scripts/:/scripts/
+      - ./ros-pid/scripts/:/scripts/
 
   ros-frobit-driver:
-    build: ../ros-frobit-driver/
+    build: ros-frobit-driver
     command: stdbuf -o L python /scripts/frobit_node.py
     depends_on:
       - ros-core
@@ -49,5 +47,5 @@ services:
     network_mode: host
     privileged: true
     volumes:
-      - /home/pi/src/ros-frobit-driver/scripts/:/scripts/
+      - ./ros-frobit-driver/scripts/:/scripts/
       - /sys/class/:/sys/class/
