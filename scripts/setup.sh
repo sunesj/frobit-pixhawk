@@ -42,7 +42,7 @@ cd "$current_dir"
 
 echo ""
 echo "Please reboot and then run:"
-echo "  source $frobit_dir/finish_setup.sh"
+echo "  source $frobit_dir/scripts/finish_setup.sh"
 echo ""
 
 

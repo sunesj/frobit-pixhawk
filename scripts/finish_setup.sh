@@ -7,7 +7,6 @@ sudo systemctl start docker
 sudo apt install -y docker-compose
 sudo groupadd docker
 sudo usermod -aG docker "$USER"
-newgrp docker
 
 echo "Removing dependencies that are no longer needed"
 sudo apt autoremove -y
@@ -19,3 +18,6 @@ echo "Start Frobit by running:"
 echo "  cd $frobit_dir"
 echo "  docker-compose up"
 echo ""
+
+# Load docker group
+newgrp docker
