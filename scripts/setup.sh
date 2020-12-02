@@ -1,10 +1,8 @@
 #!/bin/bash
 
-if ! grep -q "dtoverlay=pwm-2chan" /boot/config.txt;
-then
+if ! grep -q "dtoverlay=pwm-2chan" /boot/config.txt; then
   echo "Enabling PWM chip"
-  echo "dtoverlay=pwm-2chan" | sudo tee -a /boot/config.txt > /dev/null
-  #sudo dtoverlay pwm-2chan # Enable overlay manually to avoid reboot
+  echo "dtoverlay=pwm-2chan" | sudo tee -a /boot/config.txt >/dev/null
 fi
 
 echo "Updating packages"
@@ -19,31 +17,16 @@ frobit_dir=$HOME/Frobit-Pixhawk
 git clone https://github.com/sunesj/frobit-pixhawk.git "$frobit_dir"
 
 echo "Configuring crontabs"
-current_dir=$PWD
-cd "$frobit_dir" || (echo "Unable to enter directory $frobit_dir. Aborting setup..." && exit)
-temp_file=tmp_crontab_file
-cmd_signal_alive=$frobit_dir/scripts/signal_alive.sh
-cmd_check_status="/usr/bin/python3 $frobit_dir/scripts/check_status.py"
-crontab -l >$temp_file
-echo "@reboot $cmd_signal_alive" >> $temp_file
-crontab $temp_file
-# shellcheck disable=SC2024
-sudo crontab -l >$temp_file
-echo "@reboot @cmd_check_status" >> $temp_file
-sudo crontab $temp_file
-rm $temp_file
-# shellcheck disable=SC2164
-cd "$current_dir"
-
-# Starts script to avoid a reboot
-#echo "Starting status scripts"
-#$cmd_signal_alive &
-#$cmd_check_status &
+temp_file=$frobit_dir/tmp_crontab_file
+crontab -l >"$temp_file"
+echo "@reboot $frobit_dir/scripts/signal_alive.sh" >>"$temp_file"
+crontab "$temp_file"
+sudo crontab -l >"$temp_file"
+echo "@reboot /usr/bin/python3 $frobit_dir/scripts/check_status.py" >>"$temp_file"
+sudo crontab "$temp_file"
+rm "$temp_file"
 
 echo ""
 echo "Please reboot and then run:"
 echo "  source $frobit_dir/scripts/finish_setup.sh"
 echo ""
-
-
-
