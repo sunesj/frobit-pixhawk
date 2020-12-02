@@ -23,11 +23,11 @@ cd "$src_dir" || (echo "Unable to enter directory $src_dir. Aborting setup..." &
 echo "Configuring crontabs"
 temp_file=tmp_crontab_file
 crontab -l > $temp_file
-echo "@reboot $src_dir/signal_alive.sh" >> $temp_file
+echo "@reboot $src_dir/scripts/signal_alive.sh" >> $temp_file
 crontab $temp_file
 # shellcheck disable=SC2024
 sudo crontab -l > $temp_file
-echo "@reboot /usr/bin/python3 $src_dir/check_status.py" >> $temp_file
+echo "@reboot /usr/bin/python3 $src_dir/scripts/check_status.py" >> $temp_file
 sudo crontab $temp_file
 rm $temp_file
 
