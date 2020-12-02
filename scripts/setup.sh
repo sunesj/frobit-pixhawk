@@ -28,5 +28,5 @@ rm "$temp_file"
 
 echo ""
 echo "Please reboot and then run:"
-echo "  source $frobit_dir/scripts/finish_setup.sh"
+echo "  bash $frobit_dir/scripts/finish_setup.sh"
 echo ""
