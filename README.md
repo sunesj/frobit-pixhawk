@@ -9,7 +9,7 @@ The sections below describe how to set up the hardware and software.
 Coming soon...
 
 ## Preparing the Raspberry Pi
-See instructions for setting up the RPi with a clean installation of Raspberry Pi OS (Raspbian Buster).
+See [instructions](https://github.com/sunesj/frobit-pixhawk/blob/master/preparing_rpi.md) for setting up the RPi with a clean installation of Raspberry Pi OS (Raspbian Buster).
 
 ## Installing and Running the Frobit-Pixhawk Controller
 Once the RPi is prepared, and you are connected to it through SSH, the Frobit-Pixhawk code and its dependencies must be installed and configured. Convenience scripts are provided for this ([setup.sh](https://github.com/sunesj/frobit-pixhawk/blob/master/scripts/setup.sh) and [finish_setup.sh](https://github.com/sunesj/frobit-pixhawk/blob/master/scripts/finish_setup.sh)). To begin the installation simply download and run [setup.sh](https://github.com/sunesj/frobit-pixhawk/blob/master/scripts/setup.sh).
