@@ -9,5 +9,5 @@ RUN wget https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/
     rm ./install_geographiclib_datasets.sh
 
 # Needed for offboard controller
-RUN sudo apt install python-pip && \
+RUN sudo apt install python-pip -y && \
     pip install geographiclib
