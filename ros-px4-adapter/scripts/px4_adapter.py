@@ -35,11 +35,15 @@ class PX4Adapter():
 
     def spin(self):
         r = rospy.Rate(1)
+        count = 0;
         while not rospy.is_shutdown():
-            if self.has_published:
-                rospy.loginfo("Alive - Has published")
-                self.has_published = False
-            else:
-                rospy.loginfo("Alive - Nothing published")
+            if count == 10:
+                count = 0
+                if self.has_published:
+                    rospy.loginfo("Alive - Has published")
+                    self.has_published = False
+                else:
+                    rospy.loginfo("Alive - Nothing published"
+            count = count + 1
             r.sleep()
 
