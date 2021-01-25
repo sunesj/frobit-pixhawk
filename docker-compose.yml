@@ -49,17 +49,3 @@ services:
     volumes:
       - ./ros-frobit-driver/scripts/:/scripts/
       - /sys/class/:/sys/class/
-
-  ros-offboard-controller:
-    image: frobit-mavros:latest
-    command: python /scripts/offboard_controller_node.py
-    depends_on:
-      - ros-core
-      - ros-mavros
-      - ros-px4-adapter
-      - ros-pid
-      - ros-frobit-driver
-    restart: always
-    network_mode: host
-    volumes:
-      - ./ros-offboard-controller/scripts/:/scripts/
